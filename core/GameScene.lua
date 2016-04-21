@@ -23,8 +23,15 @@ function scene:create( event )
     planetBase.x = content.centerX;
     planetBase.y = content.centerY;
 
-    local spaceShip = SpaceShip.new(SpaceShip.TYPE_POWER, SpaceShip.DIFFICULTY_LOW);
-    spaceShip:attackTarget( planetBase );
+    local function spawn()
+        local spawnCountdown = math.random( 1000,3000 );
+        timer.performWithDelay( spawnCountdown, function(event)
+            local spaceShip = SpaceShip.new(SpaceShip.TYPE_POWER, SpaceShip.DIFFICULTY_LOW);
+            spaceShip:attackTarget( planetBase );
+            spawn();
+        end, 1 );
+    end
+    spawn();
 
 end
 

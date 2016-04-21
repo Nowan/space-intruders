@@ -33,7 +33,6 @@ function new(type, difficulty)
 		--step 2: move ship towards the target
 		local distance = math.sqrt( math.pow( differenceX, 2 )+math.pow( differenceY, 2 ) );
 		local transisionDuration = distance/spaceShip.speed;
-		print(transisionDuration)
 		transition.to(spaceShip, {x=target.x, y=target.y, time=transisionDuration})
 	end
 

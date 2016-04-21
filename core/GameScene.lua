@@ -24,7 +24,7 @@ function scene:create( event )
     planetBase.y = content.centerY;
 
     local function spawn()
-        local spawnCountdown = math.random( 1000,3000 );
+        local spawnCountdown = math.random( 1000,2000 );
         timer.performWithDelay( spawnCountdown, function(event)
             local shipType = math.random( 2 )-1;
             local typeLetter;
@@ -36,6 +36,9 @@ function scene:create( event )
             local shipDifficulty = math.random( 2 );
 
             local spaceShip = SpaceShip.new(shipType, shipDifficulty);
+            spaceShip.x = math.random( content.width+1000)-500;
+            spaceShip.y = math.random( content.height+1000 )-500;
+
             spaceShip:attackTarget( planetBase );
             spawn();
         end, 1 );

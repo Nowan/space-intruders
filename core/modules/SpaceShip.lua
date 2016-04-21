@@ -16,7 +16,6 @@ end
 
 function new(type, difficulty)
 	local spaceShip = display.newContainer( 100, 100 );
-	print(type,difficulty)
 
 	-------------------------- parameters ------------------------------
 	local shipHeight = 150;
@@ -29,7 +28,10 @@ function new(type, difficulty)
 		local differenceX = spaceShip.x - target.x;
 		local differenceY = spaceShip.y - target.y;
 		local targetAngle = math.atan( differenceY/differenceX )*180/math.pi + 90;
+		if(differenceX>0) then targetAngle = targetAngle+180; end
 		spaceShip.rotation = targetAngle;
+
+		print(differenceX,differenceY,targetAngle);
 
 		--step 2: move ship towards the target
 		local distance = math.sqrt( math.pow( differenceX, 2 )+math.pow( differenceY, 2 ) );

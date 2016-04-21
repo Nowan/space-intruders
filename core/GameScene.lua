@@ -11,8 +11,11 @@ local scene = composer.newScene()
 function scene:create( event )
     local sceneGroup = self.view
 
-end
+    local spaceBackground = display.newImageRect( sceneGroup, "core/assets/images/space-1.jpg", cWidth, cHeight );
+    spaceBackground.x = cCenterX;
+    spaceBackground.y = cCenterY;
 
+end
 
 
 function scene:show( event )
@@ -25,7 +28,6 @@ function scene:show( event )
         
     end
 end
-
 
 
 function scene:hide( event )

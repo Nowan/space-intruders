@@ -40,6 +40,7 @@ function new(type, difficulty)
 	function spaceShip:destroy()
 		transition.cancel(self.moveTransition);
 
+		physics.removeBody( self );
 		timer.performWithDelay( 1000, function(event) 
 			self:removeSelf( );
 			self=nil;
@@ -51,6 +52,13 @@ function new(type, difficulty)
 		self.isSensor = true;
 		self.name = "spaceShip";
 	end
+
+	------------------------ event handlers ----------------------------
+
+	spaceShip:addEventListener( "tap", function( event )
+	    spaceShip:destroy();
+	    return true;
+	end)
 
 	------------------------- declarations -----------------------------
 

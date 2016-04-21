@@ -16,7 +16,7 @@ function new()
 
 		self:addEventListener( "collision", function(event)
 	        if ( event.phase == "began" and event.other.name=="spaceShip") then
-	        	event.other:destroy();
+	        	timer.performWithDelay( 1, function() event.other:destroy(); end,1 )
 	        end
         end );
 	end

@@ -10,6 +10,7 @@ local physics = require("physics");
 
 --------------------------- local declarations -----------------------------
 
+local gameScore = 0;
 
 --------------------------- composer functions -----------------------------
 
@@ -17,19 +18,26 @@ local physics = require("physics");
 function scene:create( event )
     local sceneGroup = self.view
 
+    gameScore=0;
+
+    local gui = Gui.new();
+
     physics.start( );
     physics.setGravity( 0, 0 );
     physics.setDrawMode( "hybrid" );
 
-    local spaceBackground = display.newImage( sceneGroup, "core/assets/images/space-1.jpg");
+    local battlefield = display.newGroup( );
+
+    local spaceBackground = display.newImage( battlefield, "core/assets/images/space-1.jpg");
     Resizer:fitToHeight(spaceBackground);
     spaceBackground.x = content.centerX;
     spaceBackground.y = content.centerY;
 
-    local planetBase = PlanetBase.new();
+    local planetBase = PlanetBase.new(gui);
     planetBase.x = content.centerX;
     planetBase.y = content.centerY;
     planetBase:initPhysics();
+    battlefield:insert( planetBase );
 
     local function spawn()
         local spawnCountdown = math.random( 1000,2000 );
@@ -43,7 +51,8 @@ function scene:create( event )
             end
             local shipDifficulty = math.random( 2 );
 
-            local spaceShip = SpaceShip.new(shipType, shipDifficulty);
+            local spaceShip = SpaceShip.new(shipType, shipDifficulty, gui);
+            battlefield:insert( spaceShip );
 
             local fromTop = math.random( 2 ); -- 1 or 2
             local fromLeft = math.random( 2 ); -- 1 or 2
@@ -58,8 +67,8 @@ function scene:create( event )
     end
     spawn();
 
-    local gui = Gui.new();
-
+    sceneGroup:insert( battlefield );
+    sceneGroup:insert( gui );
 end
 
 

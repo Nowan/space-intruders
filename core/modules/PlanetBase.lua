@@ -1,6 +1,6 @@
 module(...,package.seeall);
 
-function new()
+function new(gui)
 	local planetContainer = display.newContainer( 100, 100 );
 
 	------------------------- parameters -----------------------------
@@ -16,7 +16,9 @@ function new()
 
 		self:addEventListener( "collision", function(event)
 	        if ( event.phase == "began" and event.other.name=="spaceShip") then
-	        	timer.performWithDelay( 1, function() event.other:destroy(); end,1 )
+	        	currentHealth = currentHealth - event.other.health;
+	        	gui:setHealthLabel(currentHealth);
+	        	timer.performWithDelay( 1, function() event.other:destroy(); end,1 );
 	        end
         end );
 	end

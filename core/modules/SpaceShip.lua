@@ -14,12 +14,20 @@ local function getSpeed(type, difficulty)
 	return normalSpeed*(difficulty/2)*(isFast and 2 or 1)/100;
 end
 
+local function getHealth(type, difficulty)
+	local isHuge = (type==TYPE_POWER);
+	local normalHealth = 50;
+
+	return normalHealth*(difficulty)*(isHuge and 2 or 1);
+end
+
 function new(type, difficulty)
 	local spaceShip = display.newContainer( 100, 100 );
 
 	-------------------------- parameters ----------------------------
 	local shipHeight = 150;
 	spaceShip.speed = getSpeed(type, difficulty);
+	spaceShip.health = getHealth(type, difficulty);
 
 	--------------------------- methods ------------------------------
 

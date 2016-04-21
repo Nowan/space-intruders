@@ -10,6 +10,9 @@ function new()
 
 	--------------------------- methods ------------------------------
 
+	function planetContainer:initPhysics()
+		physics.addBody( self, "static", {radius=planetSize/2} )
+	end
 
 	---------------------- init display objects ----------------------
 

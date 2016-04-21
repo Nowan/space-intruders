@@ -31,12 +31,15 @@ function new(type, difficulty)
 		if(differenceX>0) then targetAngle = targetAngle+180; end
 		spaceShip.rotation = targetAngle;
 
-		print(differenceX,differenceY,targetAngle);
-
 		--step 2: move ship towards the target
 		local distance = math.sqrt( math.pow( differenceX, 2 )+math.pow( differenceY, 2 ) );
 		local transisionDuration = distance/spaceShip.speed;
 		transition.to(spaceShip, {x=target.x, y=target.y, time=transisionDuration});
+	end
+
+	function spaceShip:initPhysics()
+		physics.addBody( spaceShip, "dynamic");
+		spaceShip.isSensor = true;
 	end
 
 	------------------------- declarations -----------------------------

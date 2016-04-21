@@ -5,6 +5,8 @@ local scene = composer.newScene()
 local PlanetBase = require("core.modules.PlanetBase");
 local SpaceShip = require("core.modules.SpaceShip");
 
+local physics = require("physics");
+
 --------------------------- local declarations -----------------------------
 
 
@@ -14,6 +16,10 @@ local SpaceShip = require("core.modules.SpaceShip");
 function scene:create( event )
     local sceneGroup = self.view
 
+    physics.start( );
+    physics.setGravity( 0, 0 );
+    physics.setDrawMode( "hybrid" );
+
     local spaceBackground = display.newImage( sceneGroup, "core/assets/images/space-1.jpg");
     Resizer:fitToHeight(spaceBackground);
     spaceBackground.x = content.centerX;
@@ -22,6 +28,7 @@ function scene:create( event )
     local planetBase = PlanetBase.new();
     planetBase.x = content.centerX;
     planetBase.y = content.centerY;
+    planetBase:initPhysics();
 
     local function spawn()
         local spawnCountdown = math.random( 1000,2000 );
@@ -38,6 +45,8 @@ function scene:create( event )
             local spaceShip = SpaceShip.new(shipType, shipDifficulty);
             spaceShip.x = math.random( content.width+1000)-500;
             spaceShip.y = math.random( content.height+1000 )-500;
+
+            spaceShip:initPhysics();
 
             spaceShip:attackTarget( planetBase );
             spawn();

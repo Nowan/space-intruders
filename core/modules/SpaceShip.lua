@@ -47,8 +47,10 @@ function new(type, difficulty, gui)
 
 	function spaceShip:destroy()
 		transition.cancel(self.moveTransition);
-
 		physics.removeBody( self );
+		self._functionListeners = nil
+  		self._tableListeners = nil
+
 		timer.performWithDelay( 1000, function(event) 
 			if(self==nil) then return end;
 			self:removeSelf( );

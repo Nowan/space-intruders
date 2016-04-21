@@ -15,7 +15,6 @@ function scene:create( event )
     Resizer:fitToHeight(spaceBackground);
     spaceBackground.x = content.centerX;
     spaceBackground.y = content.centerY;
-
 end
 
 

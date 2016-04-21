@@ -34,12 +34,22 @@ function new(type, difficulty)
 		--step 2: move ship towards the target
 		local distance = math.sqrt( math.pow( differenceX, 2 )+math.pow( differenceY, 2 ) );
 		local transisionDuration = distance/spaceShip.speed;
-		transition.to(spaceShip, {x=target.x, y=target.y, time=transisionDuration});
+		spaceShip.moveTransition = transition.to(spaceShip, {x=target.x, y=target.y, time=transisionDuration});
+	end
+
+	function spaceShip:destroy()
+		transition.cancel(self.moveTransition);
+
+		timer.performWithDelay( 1000, function(event) 
+			self:removeSelf( );
+			self=nil;
+		end,1);
 	end
 
 	function spaceShip:initPhysics()
-		physics.addBody( spaceShip, "dynamic");
-		spaceShip.isSensor = true;
+		physics.addBody( self, "dynamic");
+		self.isSensor = true;
+		self.name = "spaceShip";
 	end
 
 	------------------------- declarations -----------------------------

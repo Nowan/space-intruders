@@ -43,8 +43,12 @@ function scene:create( event )
             local shipDifficulty = math.random( 2 );
 
             local spaceShip = SpaceShip.new(shipType, shipDifficulty);
-            spaceShip.x = math.random( content.width+1000)-500;
-            spaceShip.y = math.random( content.height+1000 )-500;
+
+            local fromTop = math.random( 2 ); -- 1 or 2
+            local fromLeft = math.random( 2 ); -- 1 or 2
+            print(fromTop,fromLeft)
+            spaceShip.x = ((fromLeft==1) and 0 or content.width+200)+((fromLeft==1) and -1 or 0)*math.random(500);
+            spaceShip.y = ((fromTop==1) and 0 or content.height)+((fromTop==1) and -1 or 0)*math.random(500);
 
             spaceShip:initPhysics();
 

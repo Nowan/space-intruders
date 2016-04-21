@@ -11,7 +11,14 @@ function new()
 	--------------------------- methods ------------------------------
 
 	function planetContainer:initPhysics()
-		physics.addBody( self, "static", {radius=planetSize/2} )
+		physics.addBody( self, "static", {radius=planetSize/2} );
+		self.name="planetBase";
+
+		self:addEventListener( "collision", function(event)
+	        if ( event.phase == "began" and event.other.name=="spaceShip") then
+	        	event.other:destroy();
+	        end
+        end );
 	end
 
 	---------------------- init display objects ----------------------

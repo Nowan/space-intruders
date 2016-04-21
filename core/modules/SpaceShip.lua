@@ -17,7 +17,7 @@ end
 function new(type, difficulty)
 	local spaceShip = display.newContainer( 100, 100 );
 
-	-------------------------- parameters ------------------------------
+	-------------------------- parameters ----------------------------
 	local shipHeight = 150;
 	spaceShip.speed = getSpeed(type, difficulty);
 
@@ -42,6 +42,7 @@ function new(type, difficulty)
 
 		physics.removeBody( self );
 		timer.performWithDelay( 1000, function(event) 
+			if(self==nil) then return end;
 			self:removeSelf( );
 			self=nil;
 		end,1);

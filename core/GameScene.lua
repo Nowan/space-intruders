@@ -4,6 +4,7 @@ local scene = composer.newScene()
 
 local PlanetBase = require("core.modules.PlanetBase");
 local SpaceShip = require("core.modules.SpaceShip");
+local Gui = require("core.modules.Gui");
 
 local physics = require("physics");
 
@@ -46,7 +47,6 @@ function scene:create( event )
 
             local fromTop = math.random( 2 ); -- 1 or 2
             local fromLeft = math.random( 2 ); -- 1 or 2
-            print(fromTop,fromLeft)
             spaceShip.x = ((fromLeft==1) and 0 or content.width+200)+((fromLeft==1) and -1 or 0)*math.random(500);
             spaceShip.y = ((fromTop==1) and 0 or content.height)+((fromTop==1) and -1 or 0)*math.random(500);
 
@@ -57,6 +57,8 @@ function scene:create( event )
         end, 1 );
     end
     spawn();
+
+    local gui = Gui.new();
 
 end
 

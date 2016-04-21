@@ -2,6 +2,9 @@ local composer = require( "composer" )
 
 local scene = composer.newScene()
 
+local PlanetBase = require("core.modules.PlanetBase");
+local SpaceShip = require("core.modules.SpaceShip");
+
 --------------------------- local declarations -----------------------------
 
 
@@ -16,9 +19,11 @@ function scene:create( event )
     spaceBackground.x = content.centerX;
     spaceBackground.y = content.centerY;
 
-    local planetBase = require("core.modules.PlanetBase").new();
+    local planetBase = PlanetBase.new();
     planetBase.x = content.centerX;
     planetBase.y = content.centerY;
+
+    local spaceShip = SpaceShip.new(SpaceShip.TYPE_POWER, SpaceShip.DIFFICULTY_LOW);
 
 end
 

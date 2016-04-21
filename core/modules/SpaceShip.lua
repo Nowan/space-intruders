@@ -11,11 +11,12 @@ local function getSpeed(type, difficulty)
 	local isFast = (type==TYPE_SPEED);
 	local normalSpeed = 50;
 
-	return normalSpeed*difficulty*(isFast and 2 or 1)/100;
+	return normalSpeed*(difficulty/2)*(isFast and 2 or 1)/100;
 end
 
 function new(type, difficulty)
 	local spaceShip = display.newContainer( 100, 100 );
+	print(type,difficulty)
 
 	-------------------------- parameters ------------------------------
 	local shipHeight = 150;
@@ -33,7 +34,7 @@ function new(type, difficulty)
 		--step 2: move ship towards the target
 		local distance = math.sqrt( math.pow( differenceX, 2 )+math.pow( differenceY, 2 ) );
 		local transisionDuration = distance/spaceShip.speed;
-		transition.to(spaceShip, {x=target.x, y=target.y, time=transisionDuration})
+		transition.to(spaceShip, {x=target.x, y=target.y, time=transisionDuration});
 	end
 
 	------------------------- declarations -----------------------------

@@ -15,6 +15,11 @@ function scene:create( event )
     Resizer:fitToHeight(spaceBackground);
     spaceBackground.x = content.centerX;
     spaceBackground.y = content.centerY;
+
+    local planetBase = require("core.modules.PlanetBase").new();
+    planetBase.x = content.centerX;
+    planetBase.y = content.centerY;
+
 end
 
 

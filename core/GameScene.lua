@@ -24,6 +24,7 @@ function scene:create( event )
     planetBase.y = content.centerY;
 
     local spaceShip = SpaceShip.new(SpaceShip.TYPE_POWER, SpaceShip.DIFFICULTY_LOW);
+    spaceShip:attackTarget( planetBase );
 
 end
 

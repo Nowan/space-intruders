@@ -7,12 +7,19 @@ DIFFICULTY_LOW=1;
 DIFFICULTY_MEDIUM=2;
 DIFFICULTY_HARD=3;
 
+local function getSpeed(type, difficulty)
+	local isFast = (type==TYPE_SPEED);
+	local normalSpeed = 50;
+
+	return normalSpeed*difficulty*(isFast and 2 or 1)/100;
+end
+
 function new(type, difficulty)
 	local spaceShip = display.newContainer( 100, 100 );
 
 	-------------------------- parameters ------------------------------
 	local shipHeight = 150;
-	spaceShip.target = nil;
+	spaceShip.speed = getSpeed(type, difficulty);
 
 	--------------------------- methods ------------------------------
 
@@ -22,6 +29,12 @@ function new(type, difficulty)
 		local differenceY = spaceShip.y - target.y;
 		local targetAngle = math.atan( differenceY/differenceX )*180/math.pi + 90;
 		spaceShip.rotation = targetAngle;
+
+		--step 2: move ship towards the target
+		local distance = math.sqrt( math.pow( differenceX, 2 )+math.pow( differenceY, 2 ) );
+		local transisionDuration = distance/spaceShip.speed;
+		print(transisionDuration)
+		transition.to(spaceShip, {x=target.x, y=target.y, time=transisionDuration})
 	end
 
 	------------------------- declarations -----------------------------

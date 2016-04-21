@@ -10,7 +10,7 @@ local physics = require("physics");
 
 --------------------------- local declarations -----------------------------
 
-local gameScore = 0;
+gameScore = 0;
 
 --------------------------- composer functions -----------------------------
 

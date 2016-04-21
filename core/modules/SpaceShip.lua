@@ -21,7 +21,7 @@ local function getHealth(type, difficulty)
 	return normalHealth*(difficulty)*(isHuge and 2 or 1);
 end
 
-function new(type, difficulty)
+function new(type, difficulty, gui)
 	local spaceShip = display.newContainer( 100, 100 );
 
 	-------------------------- parameters ----------------------------
@@ -65,6 +65,8 @@ function new(type, difficulty)
 	------------------------ event handlers ----------------------------
 
 	spaceShip:addEventListener( "tap", function( event )
+		gameScore = gameScore+spaceShip.health;
+		gui:setScoreLabel(gameScore);
 	    spaceShip:destroy();
 	    return true;
 	end)
@@ -76,8 +78,6 @@ function new(type, difficulty)
 	Resizer:fitToHeight(shipTexture, shipHeight);
 	spaceShip.width = shipTexture.width;
 	spaceShip.height = shipTexture.height;
-
-
 
 	return spaceShip;
 end

@@ -11,9 +11,10 @@ local scene = composer.newScene()
 function scene:create( event )
     local sceneGroup = self.view
 
-    local spaceBackground = display.newImageRect( sceneGroup, "core/assets/images/space-1.jpg", cWidth, cHeight );
-    spaceBackground.x = cCenterX;
-    spaceBackground.y = cCenterY;
+    local spaceBackground = display.newImage( sceneGroup, "core/assets/images/space-1.jpg");
+    Resizer:fitToHeight(spaceBackground);
+    spaceBackground.x = content.centerX;
+    spaceBackground.y = content.centerY;
 
 end
 
